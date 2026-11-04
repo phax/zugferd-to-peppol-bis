@@ -23,12 +23,12 @@ import org.w3c.dom.Document;
 
 import com.helger.annotation.concurrent.Immutable;
 import com.helger.base.enforce.ValueEnforcer;
+import com.helger.phive.api.config.PhivePseudoVersionRegistrarSPIImpl;
 import com.helger.phive.api.execute.ValidationExecutionManager;
 import com.helger.phive.api.executorset.IValidationExecutorSet;
 import com.helger.phive.api.executorset.ValidationExecutorSetRegistry;
 import com.helger.phive.api.result.ValidationResultList;
 import com.helger.phive.api.validity.IValidityDeterminator;
-import com.helger.phive.peppol.PeppolValidation2025_11;
 import com.helger.phive.peppol.PeppolValidation2026_05;
 import com.helger.phive.peppol.PeppolValidationBisEurope;
 import com.helger.phive.xml.source.IValidationSourceXML;
@@ -36,8 +36,8 @@ import com.helger.phive.xml.source.ValidationSourceXML;
 import com.helger.xml.serialize.read.DOMReader;
 
 /**
- * Validates a UBL Invoice or Credit Note against the currently active Peppol BIS Billing 3
- * rules (via phive-rules-peppol).
+ * Validates a UBL Invoice or Credit Note against the currently active Peppol BIS Billing 3 rules
+ * (via phive-rules-peppol).
  *
  * @author Philip Helger
  */
@@ -69,11 +69,9 @@ public final class PeppolBisBillingValidator
   {
     ValueEnforcer.notNull (aUBLXML, "UBLXML");
 
-    final boolean bLatest = PeppolValidationBisEurope.getVersionToUse ().equals (PeppolValidation2026_05.VERSION_STR);
-    final IValidationExecutorSet <IValidationSourceXML> aVES = REGISTRY.getOfID (bIsCreditNote ? (bLatest ? PeppolValidation2026_05.VID_OPENPEPPOL_CREDIT_NOTE_UBL_V3
-                                                                                                          : PeppolValidation2025_11.VID_OPENPEPPOL_CREDIT_NOTE_UBL_V3)
-                                                                                               : (bLatest ? PeppolValidation2026_05.VID_OPENPEPPOL_INVOICE_UBL_V3
-                                                                                                          : PeppolValidation2025_11.VID_OPENPEPPOL_INVOICE_UBL_V3));
+    // Use "latest active" version
+    final IValidationExecutorSet <IValidationSourceXML> aVES = REGISTRY.getOfID ((bIsCreditNote ? PeppolValidation2026_05.VID_OPENPEPPOL_CREDIT_NOTE_UBL_V3
+                                                                                                : PeppolValidation2026_05.VID_OPENPEPPOL_INVOICE_UBL_V3).getWithVersion (PhivePseudoVersionRegistrarSPIImpl.LATEST_ACTIVE));
     if (aVES == null)
       throw new IllegalStateException ("Failed to resolve the Peppol BIS Billing validation execution set");
     if (LOGGER.isDebugEnabled ())

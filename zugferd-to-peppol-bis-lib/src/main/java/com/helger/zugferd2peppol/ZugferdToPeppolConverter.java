@@ -58,7 +58,8 @@ import un.unece.uncefact.data.standard.crossindustryinvoice._100.CrossIndustryIn
  * <ol>
  * <li>Validate the PDF with kaltblut</li>
  * <li>Extract the embedded CII D16B XML</li>
- * <li>Convert it to UBL 2.1 with en16931-cii2ubl and force the Peppol BIS Billing 3 identifiers</li>
+ * <li>Convert it to UBL 2.1 with en16931-cii2ubl and force the Peppol BIS Billing 3
+ * identifiers</li>
  * <li>Embed the PDF as base64 into the UBL</li>
  * <li>Validate the result with phive-rules-peppol</li>
  * </ol>
@@ -109,7 +110,9 @@ public class ZugferdToPeppolConverter
     return m_aSettings;
   }
 
-  private static String _getRejectionReason (final EZugferdFlavor eFlavor, final EZugferdProfile eProfile)
+  @Nullable
+  private static String _getRejectionReason (@Nullable final EZugferdFlavor eFlavor,
+                                             @Nullable final EZugferdProfile eProfile)
   {
     if (eFlavor == EZugferdFlavor.ZUGFERD_1)
       return "ZUGFeRD 1.0 uses a different CII syntax (CrossIndustryDocument) that cannot be converted to Peppol BIS Billing 3";
@@ -168,7 +171,7 @@ public class ZugferdToPeppolConverter
     if (sRejectionReason != null)
       return new ZugferdToPeppolResult (aHybridResult, sRejectionReason, aConversionErrors, null, false, null);
 
-    // 3. Extract and convert
+    // 3. Extract and parse CII
     final byte [] aCII = HybridExtractor.extractInvoiceXml (aSource);
     final CrossIndustryInvoiceType aCIIInvoice = new CIID16BCrossIndustryInvoiceTypeMarshaller ().setValidationEventHandler (new WrappedCollectingValidationEventHandler (aConversionErrors))
                                                                                                  .read (aCII);
@@ -180,6 +183,7 @@ public class ZugferdToPeppolConverter
                                         false,
                                         null);
 
+    // 4. Convert CII to UBL
     final CIID16BToUBL21Converter aConverter = new CIID16BToUBL21Converter ();
     aConverter.setUBLCreationMode (EUBLCreationMode.AUTOMATIC)
               .setCustomizationID (PEPPOL_BIS_BILLING_3_CUSTOMIZATION_ID)
@@ -193,7 +197,7 @@ public class ZugferdToPeppolConverter
                                         false,
                                         null);
 
-    // 4. Embed the PDF
+    // 5. Embed the PDF into the UBL
     final DocumentReferenceType aDocRef = new DocumentReferenceType ();
     aDocRef.setID (m_aSettings.getAttachmentFilename ());
     final EmbeddedDocumentBinaryObjectType aEmbedded = new EmbeddedDocumentBinaryObjectType ();
@@ -243,13 +247,17 @@ public class ZugferdToPeppolConverter
                                         bIsCreditNote,
                                         null);
 
-    // 5. Validate the result
+    // 6. Validate the result
     ValidationResultList aPeppolResult = null;
     if (m_aSettings.isValidatePeppol ())
       aPeppolResult = PeppolBisBillingValidator.validate (aUBLXML, bIsCreditNote);
 
     if (LOGGER.isDebugEnabled ())
-      LOGGER.debug ("Created a UBL " + (bIsCreditNote ? "Credit Note" : "Invoice") + " of " + aUBLXML.length + " bytes");
+      LOGGER.debug ("Created a UBL " +
+                    (bIsCreditNote ? "Credit Note" : "Invoice") +
+                    " of " +
+                    aUBLXML.length +
+                    " bytes");
     return new ZugferdToPeppolResult (aHybridResult, null, aConversionErrors, aUBLXML, bIsCreditNote, aPeppolResult);
   }
 }
