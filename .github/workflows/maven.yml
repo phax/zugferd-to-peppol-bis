@@ -5,6 +5,7 @@ name: Maven deploy Snapshots
 
 on:
   push:
+  pull_request:
 
 permissions:
   contents: read
@@ -40,7 +41,6 @@ jobs:
         key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
         restore-keys: |
           ${{ runner.os }}-maven-
-
 
     - name: Publish to the Maven Central Repository
       run: mvn --batch-mode --update-snapshots -P release-snapshot deploy
