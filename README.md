@@ -114,7 +114,7 @@ The CLI already includes it.
 
 # News and noteworthy
 
-v0.9.0 - work in progress
+v1.0.0 - 2026-11-04
 * Initial version
   Contains a library and a command line client
 
