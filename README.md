@@ -9,6 +9,8 @@
 Converts a valid **ZUGFeRD / Factur-X** hybrid invoice (PDF/A-3 with embedded CII XML) to a **Peppol BIS Billing 3** UBL invoice or credit note.
 The original PDF is embedded as base64 into the UBL (BG-24 "Additional supporting documents", BT-125), so the XML is the one and only artefact to send via Peppol.
 
+![Hybrid PDF with embedded CII XML is converted to a Peppol BIS Billing 3 UBL XML with the embedded PDF](docs/conversion.svg)
+
 It glues together three existing projects:
 
 | Step | Project | Purpose |
