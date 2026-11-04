@@ -1,0 +1,9 @@
+.claude/
+.settings/
+target/
+
+.classpath
+.DS_Store
+.project
+zz
+generated/
