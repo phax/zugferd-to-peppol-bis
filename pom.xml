@@ -66,6 +66,9 @@
     <en16931-cii2ubl.version>4.0.3</en16931-cii2ubl.version>
     <kaltblut.version>0.9.6</kaltblut.version>
     <phive-rules.version>4.6.4</phive-rules.version>
+    <en16931-basics.version>1.0.4</en16931-basics.version>
+    <phlox.version>0.6.1-SNAPSHOT</phlox.version>
+    <ph-pdf-layout.version>8.4.3</ph-pdf-layout.version>
     
     <picocli.version>4.7.7</picocli.version>
   </properties>
@@ -94,11 +97,23 @@
         <scope>import</scope>
       </dependency>
       <dependency>
+        <groupId>com.helger</groupId>
+        <artifactId>ph-pdf-layout-parent-pom</artifactId>
+        <version>${ph-pdf-layout.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
         <groupId>com.helger.kaltblut</groupId>
         <artifactId>kaltblut-parent-pom</artifactId>
         <version>${kaltblut.version}</version>
         <type>pom</type>
         <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.helger</groupId>
+        <artifactId>en16931-basics</artifactId>
+        <version>${en16931-basics.version}</version>
       </dependency>
       <dependency>
         <groupId>com.helger</groupId>
@@ -109,6 +124,21 @@
         <groupId>com.helger.phive.rules</groupId>
         <artifactId>phive-rules-peppol</artifactId>
         <version>${phive-rules.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.helger.phlox</groupId>
+        <artifactId>phlox-pdf</artifactId>
+        <version>${phlox.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.helger.phlox</groupId>
+        <artifactId>phlox-cii</artifactId>
+        <version>${phlox.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.helger.phlox</groupId>
+        <artifactId>phlox-testfiles</artifactId>
+        <version>${phlox.version}</version>
       </dependency>
       
       <dependency>

@@ -72,6 +72,32 @@
       <artifactId>kaltblut-testfiles</artifactId>
       <scope>test</scope>
     </dependency>
+    <!-- Creates the ZUGFeRD / Factur-X test invoices (integration test) -->
+    <dependency>
+      <groupId>com.helger.phlox</groupId>
+      <artifactId>phlox-pdf</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.helger.phlox</groupId>
+      <artifactId>phlox-cii</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.helger.phlox</groupId>
+      <artifactId>phlox-testfiles</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.helger.font</groupId>
+      <artifactId>ph-fonts-roboto</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.helger.kaltblut</groupId>
+      <artifactId>kaltblut-verapdf</artifactId>
+      <scope>test</scope>
+    </dependency>
     <dependency>
       <groupId>com.sun.xml.bind</groupId>
       <artifactId>jaxb-impl</artifactId>
