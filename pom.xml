@@ -140,6 +140,27 @@
         <artifactId>phlox-testfiles</artifactId>
         <version>${phlox.version}</version>
       </dependency>
+      <dependency>
+        <groupId>com.helger.font</groupId>
+        <artifactId>ph-fonts-bom</artifactId>
+        <version>6.1.1</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.glassfish.jaxb</groupId>
+        <artifactId>jaxb-bom</artifactId>
+        <version>4.0.9</version>
+        <scope>import</scope>
+        <type>pom</type>
+      </dependency>
+      
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junit4.version}</version>
+      </dependency>
       
       <dependency>
         <groupId>com.helger.zugferd2peppol</groupId>
