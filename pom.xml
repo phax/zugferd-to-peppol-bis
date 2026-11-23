@@ -68,7 +68,7 @@
     <en16931-basics.version>1.1.0</en16931-basics.version>
     <en16931-cii2ubl.version>4.0.3</en16931-cii2ubl.version>
     <kaltblut.version>1.0.0</kaltblut.version>
-    <phive-rules.version>4.7.1</phive-rules.version>
+    <phive-rules.version>4.7.2</phive-rules.version>
     <phlox.version>0.6.1</phlox.version>
     <ph-pdf-layout.version>8.4.4</ph-pdf-layout.version>
   </properties>
