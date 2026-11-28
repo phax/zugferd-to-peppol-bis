@@ -70,7 +70,7 @@
     <kaltblut.version>1.0.0</kaltblut.version>
     <phive-rules.version>4.7.3</phive-rules.version>
     <phlox.version>0.6.1</phlox.version>
-    <ph-pdf-layout.version>8.4.4</ph-pdf-layout.version>
+    <ph-pdf-layout.version>8.4.5</ph-pdf-layout.version>
   </properties>
 
   <dependencyManagement>
